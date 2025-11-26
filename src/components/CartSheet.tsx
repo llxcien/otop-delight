@@ -43,7 +43,7 @@ const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
               <div className="space-y-4">
                 {cart.map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className="flex gap-4 rounded-lg border border-border p-4"
                   >
                     <img
@@ -60,7 +60,7 @@ const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
                             size="icon"
                             className="h-8 w-8"
                             onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
+                              updateQuantity(item._id, item.quantity - 1)
                             }
                           >
                             <Minus className="h-3 w-3" />
@@ -71,7 +71,7 @@ const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
                             size="icon"
                             className="h-8 w-8"
                             onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
+                              updateQuantity(item._id, item.quantity + 1)
                             }
                           >
                             <Plus className="h-3 w-3" />
@@ -84,7 +84,7 @@ const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => removeFromCart(item._id)}
                             className="h-auto p-0 text-destructive hover:text-destructive"
                           >
                             <Trash2 className="h-4 w-4" />

@@ -46,7 +46,7 @@ const Checkout = () => {
     const orderData: OrderData = {
       customer: formData,
       items: cart.map((item) => ({
-        id: item.id,
+        _id: item._id,
         name: item.name,
         price: item.price,
         quantity: item.quantity,
@@ -131,7 +131,7 @@ const Checkout = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               {cart.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm">
+                <div key={item._id} className="flex justify-between text-sm">
                   <div className="flex gap-4">
                     <span className="font-medium text-muted-foreground">x{item.quantity}</span>
                     <span className="line-clamp-1 max-w-[180px]">{item.name}</span>

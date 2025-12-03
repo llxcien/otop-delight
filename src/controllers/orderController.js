@@ -9,16 +9,15 @@ export const createOrder = async (req, res) => {
   try {
     const { customer, items, total, subtotal, shippingCost, discount } = req.body;
     
-    // Logic: ถ้าเก็บเงินปลายทาง (COD) สถานะต้องเป็น 'unpaid'
-    // ถ้าจ่ายผ่านช่องทางอื่น (สมมติว่าตัดบัตรสำเร็จแล้ว) ให้เป็น 'paid'
+    // กำหนดสถานะตามวิธีชำระเงิน
     let orderStatus = 'paid';
     if (customer.paymentMethod === 'cod') {
-        orderStatus = 'unpaid'; 
+        orderStatus = 'unpaid'; // เก็บปลายทาง = ยังไม่จ่าย
     }
 
     const orderItems = [];
 
-    // ตัด Stock สินค้า
+    // ตัด Stock
     for (const item of items) {
       const product = await Product.findOneAndUpdate(
         { _id: item._id, stock: { $gte: item.quantity } },
@@ -38,7 +37,7 @@ export const createOrder = async (req, res) => {
       });
     }
 
-    // สร้าง Order พร้อมรายละเอียดราคาครบถ้วน
+    // สร้าง Order
     const newOrder = new Order({
       customer,
       items: orderItems,

@@ -27,7 +27,7 @@ export const getProvinces = (products: Product[]): string[] => {
 };
 
 // ----------------------------
-// Order Type
+// Order Type (Updated)
 // ----------------------------
 export interface OrderData {
   customer: {
@@ -37,6 +37,7 @@ export interface OrderData {
     province: string;
     zipcode: string;
     shippingMethod: string;
+    paymentMethod: string; // เพิ่ม
   };
   items: {
     _id: string;
@@ -44,6 +45,10 @@ export interface OrderData {
     price: number;
     quantity: number;
   }[];
+  // เพิ่ม breakdown ราคา
+  subtotal: number;
+  shippingCost: number;
+  discount: number;
   total: number;
   date: string;
 }
@@ -57,8 +62,7 @@ export const createOrder = async (orderData: OrderData) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(orderData),
   });
-
   if (!res.ok) throw new Error("Failed to create order");
-
   return res.json();
 };
+

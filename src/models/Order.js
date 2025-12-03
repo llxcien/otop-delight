@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
     price: Number,
     quantity: Number
   }],
-  // รายละเอียดราคาสำหรับการออกใบเสร็จ
+  // รายละเอียดราคา
   subtotal: { type: Number, required: true },
   shippingCost: { type: Number, required: true },
   discount: { type: Number, default: 0 },
